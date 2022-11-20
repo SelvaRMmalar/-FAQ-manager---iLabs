@@ -79,7 +79,7 @@ function Actionmenu(item) {
         setIsOpen={setIsOpenView}
       />
       <Modal
-        content={<Delete />}
+        content={<Delete id={item?.id} setIsOpen={setIsOpenDetele} />}
         isOpen={isOpenDetele}
         setIsOpen={setIsOpenDetele}
       />

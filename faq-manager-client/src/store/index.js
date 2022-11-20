@@ -49,7 +49,6 @@ export function useStore() {
   const isReady = useMemo(() => {
     return store !== null && persist !== null;
   }, [store, persist]);
-  console.log('store=======', store, '====================udw', persist);
   return { store, persist, isReady };
 }
 export default createConfigureStore;
