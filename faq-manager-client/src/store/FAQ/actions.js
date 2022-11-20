@@ -1,34 +1,21 @@
-import axios from '../../Config/axios';
+//import axios from '../../Config/axios';
+import axios from 'axios';
 import * as types from './types';
+const client = axios.create({
+  baseURL: 'http://localhost:3001/api/faq/add',
+});
 
-export const loadFleets = (page, pageSize, filters) => async (dispatch) => {
+const config = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+  },
+};
+
+export const loadFAQ = () => async (dispatch) => {
   try {
     dispatch({ type: types.LOAD_FAQ_REQUEST });
-    // const { data } = await axios.get(
-    //   `/fleets?page=${page}&pageSize=${pageSize}${
-    //     filters.query ? '&searchString=' + filters.query : ''
-    //   }`
-    // );
-    const data = [
-      {
-        id: '1',
-        question: 'question1',
-        catogory: 'About Company',
-        isActive: true,
-      },
-      {
-        id: '2',
-        question: 'question2',
-        catogory: 'About Company',
-        isActive: true,
-      },
-      {
-        id: '3',
-        question: 'question3',
-        catogory: 'About Company',
-        isActive: false,
-      },
-    ];
+    const { data } = await axios.get('http://localhost:5000/api/faq', config);
     dispatch({
       type: types.LOAD_FAQ_SUCCESS,
       payload: data,
@@ -42,10 +29,8 @@ export const loadFleets = (page, pageSize, filters) => async (dispatch) => {
 };
 
 export const storeItem = (values) => async () => {
-  console.log('logedjcibd', values);
-  return { status: 200 };
-  //return await axios.post('/fleet-type', values);
+  return await axios.post('http://localhost:5000/api/faq/add', values);
 };
 export const updateItem = (id, values) => async () => {
-  return await axios.patch(`/fleet-type/${id}`, values);
+  // return await axios.patch(`/fleet-type/${id}`, values);
 };
