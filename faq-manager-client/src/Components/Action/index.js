@@ -84,7 +84,7 @@ function Actionmenu(item) {
         setIsOpen={setIsOpenDetele}
       />
       <Modal
-        content={<Active />}
+        content={<Active setIsOpen={setIsOpenActive} item={item} />}
         isOpen={isOpenActive}
         setIsOpen={setIsOpenActive}
       />
