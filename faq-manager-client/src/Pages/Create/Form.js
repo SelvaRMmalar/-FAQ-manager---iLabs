@@ -16,6 +16,7 @@ function Form({
   handleSubmit,
   isSubmitting,
 }) {
+ 
   return (
     <form onSubmit={handleSubmit} className='text-lg'>
       <div className='lg:visible md:visible sm:visible grid grid-row-3 p-6'>
@@ -37,7 +38,7 @@ function Form({
           <Textarea
             rows={4}
             label='Question '
-            name='question '
+            name='question'
             values={values}
             errors={errors}
             touches={touched}
@@ -62,13 +63,13 @@ function Form({
 
 export default withFormik({
   validationSchema: object().shape({
-    catogory: string().required('Fleet Group is a required field'),
-    question: string().nullable(),
+    catogory: string().required('catogory is a required field'),
+    question: string().nullable('question is a required field'),
     isActive: boolean().nullable(),
   }),
   mapPropsToValues: ({ item = { isActive: true } }) => ({
-    catogory: item.name,
-    question: item.description,
+    catogory: item.catogory,
+    question: item.question,
     isActive: item.isActive,
   }),
   handleSubmit: (values, { props, ...actions }) => {

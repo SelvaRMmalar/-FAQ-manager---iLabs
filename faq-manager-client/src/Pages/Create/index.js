@@ -6,22 +6,25 @@ import Form from './Form';
 
 function Index() {
   const dispatch = useDispatch();
-  const onStore = useCallback(async (values, actions) => {
-    actions.setSubmitting(true);
-    try {
-      const response = await dispatch(storeItem(values));
-      if (response.status === 200) {
-        alert('New Question Added');
-        window.location.reload();
+  const onStore = useCallback(
+    async (values, actions) => {
+      actions.setSubmitting(true);
+      try {
+        const response = await dispatch(storeItem(values));
+        if (response.status === 200) {
+          alert('New Question Added');
+          window.location.reload();
+        }
+      } catch (e) {
+        //   if (e.response?.data?.error) {
+        //     alert('Question Added Failed');
+        //     actions.setErrors(e.response?.data?.error);
+        //   }
+        actions.setSubmitting(false);
       }
-    } catch (e) {
-      //   if (e.response?.data?.error) {
-      //     alert('Question Added Failed');
-      //     actions.setErrors(e.response?.data?.error);
-      //   }
-      actions.setSubmitting(false);
-    }
-  }, []);
+    },
+    [dispatch]
+  );
 
   return (
     <div className=' bg-gray-200 md:p-16 sm:p-3'>
