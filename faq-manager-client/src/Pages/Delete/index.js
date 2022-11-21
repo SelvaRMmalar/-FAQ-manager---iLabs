@@ -1,11 +1,13 @@
 import React from 'react';
 import Button from '../../Components/Button';
 import { useDispatch } from 'react-redux';
-import { deleteItem } from '../../store/FAQ/actions';
-function Delete(id, setIsOpen) {
+import { deleteItem, loadFAQ } from '../../store/FAQ/actions';
+function Delete({ id, setIsOpen }) {
   const dispatch = useDispatch();
-  const handleDelete = () => {
-    dispatch(deleteItem(id));
+  const handleDelete = async () => {
+    await dispatch(deleteItem(id));
+    await dispatch(loadFAQ());
+    setIsOpen(false);
   };
 
   return (
@@ -14,7 +16,7 @@ function Delete(id, setIsOpen) {
       <div className='flex justify-between p-4'>
         <Button
           name='Delete'
-          onClick={handleDelete}
+          onClick={() => handleDelete()}
           className='bg-red-800 text-white p-2 px-3 rounded-xl '
         />
 

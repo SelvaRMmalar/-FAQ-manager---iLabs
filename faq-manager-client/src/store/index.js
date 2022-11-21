@@ -4,13 +4,10 @@ import promise from 'redux-promise';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { persistStore } from 'redux-persist';
 import reducers from './reducer';
-import { createAxios } from '../Config/axios';
 
 const createConfigureStore = async () => {
   const store = createStore(reducers, compose(applyMiddleware(thunk, promise)));
-
   const persist = await persistStore(store);
-  createAxios(store);
   return { store, persist };
 };
 

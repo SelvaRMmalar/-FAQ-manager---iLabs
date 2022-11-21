@@ -10,16 +10,7 @@ const instance = axios.create({
   },
 });
 
-export function createAxios({ getState }) {
-  instance.interceptors.request.use(
-    (config) => {
-      const { headers } = config.headers;
-      return { ...config, headers };
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
-}
+
+
 
 export default instance;

@@ -1,9 +1,12 @@
 import * as types from './types';
-import axios from 'axios';
-export const loadFAQ = () => async (dispatch) => {
+import axios from '../../Config/axios';
+export const loadFAQ = (limit, offset, query) => async (dispatch) => {
   try {
     dispatch({ type: types.LOAD_FAQ_REQUEST });
-    const { data } = await axios.get('http://localhost:5000/api/faq/');
+    // const { data } = await axios.get('faq');
+    const { data } = await axios.get(
+      `/faq?limit=${limit}&offset=${offset}${query ? '&search=' + query : ''}`
+    );
     dispatch({
       type: types.LOAD_FAQ_SUCCESS,
       payload: data,
@@ -17,11 +20,11 @@ export const loadFAQ = () => async (dispatch) => {
 };
 
 export const storeItem = (values) => async () => {
-  return await axios.post('http://localhost:5000/api/faq/add', values);
+  return await axios.post('faq/add', values);
 };
 export const updateItem = (id, values) => async () => {
-  return await axios.patch(`http://localhost:5000/api/faq/${id}`, values);
+  return await axios.put(`/faq/${id}`, values);
 };
 export const deleteItem = (id) => async () => {
-  return await axios.delete(`http://localhost:5000/api/faq/${id}`);
+  return await axios.delete(`/faq/${id}`);
 };
