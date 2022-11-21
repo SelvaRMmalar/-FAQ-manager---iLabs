@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-
+const dotenv = require('dotenv');
+dotenv.config();
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.APP_CILET,
     credentials: true,
     optionSuccessStatus: 200,
   })
@@ -22,8 +23,6 @@ app.get('/', (req, res) => {
   res.json({ message: 'hello api' });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`https://localhost:${PORT}`);
+app.listen(process.env.APP_PORT, () => {
+  console.log(`https://localhost:${process.env.APP_PORT}`);
 });
