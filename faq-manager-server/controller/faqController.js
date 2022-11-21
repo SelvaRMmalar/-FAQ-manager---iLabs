@@ -19,11 +19,15 @@ const addFaq = async (req, res) => {
 const getAllFaq = async (req, res) => {
   let faqs = await faq.findAll({
     attributes: ['id', 'question', 'catogory', 'isActive'],
+    limit: req.query.limit,
+    offset: req.query.offset,
   });
 
   res.status(200).send({
     data: faqs,
     status: 'succeed',
+    pageSize: limit,
+    page: (offset + limit) / limit,
   });
 };
 //update faq
