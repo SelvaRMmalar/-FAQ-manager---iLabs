@@ -29,15 +29,15 @@ const getAllFaq = async (req, res) => {
       }
     : null;
 
-  let faqs = await faq.findAll({
+  let { count, rows } = await faq.findAndCountAll({
     attributes: ['id', 'question', 'catogory', 'isActive'],
     limit: limits,
     offset: offsets,
     where: condition,
   });
-  let count = await faq.count();
+
   res.status(200).send({
-    data: faqs,
+    data: rows,
     status: 'succeed',
     pageSize: limits,
     page: parseInt(req.query.page),
