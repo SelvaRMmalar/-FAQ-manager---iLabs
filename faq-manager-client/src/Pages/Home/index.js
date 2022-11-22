@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Search from '../../Components/Search';
 import Table from '../../Components/Table';
@@ -6,6 +6,7 @@ import Button from '../../Components/Button';
 import { useNavigate } from 'react-router-dom';
 function Home() {
   const navigate = useNavigate();
+  const [query,setQuery]=useState('');
   return (
     <div className=' bg-gray-200'>
       <div className='md:flex py-4'>
@@ -25,9 +26,9 @@ function Home() {
           />
         </div>
       </div>
-      <Search />
+      <Search setQuery={setQuery}/>
       <div className='py-8'>
-        <Table />
+        <Table query={query} />
       </div>
     </div>
   );

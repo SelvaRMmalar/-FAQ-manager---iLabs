@@ -1,15 +1,19 @@
 import * as types from './types';
 import axios from '../../Config/axios';
-export const loadFAQ = (limit, offset, query) => async (dispatch) => {
+export const loadFAQ = (pageSize, page, query) => async (dispatch) => {
   try {
     dispatch({ type: types.LOAD_FAQ_REQUEST });
-    // const { data } = await axios.get('faq');
     const { data } = await axios.get(
-      `/faq?limit=${limit}&offset=${offset}${query ? '&search=' + query : ''}`
+      `/faq?pageSize=${pageSize}&page=${page}${query ? '&search=' + query : ''}`
     );
     dispatch({
       type: types.LOAD_FAQ_SUCCESS,
-      payload: data,
+      payload: data.data,
+      paginationOption: {
+        pageSize: data.pageSize,
+        page: data.page,
+        totalRows: data.totalRows,
+      },
     });
   } catch (error) {
     dispatch({

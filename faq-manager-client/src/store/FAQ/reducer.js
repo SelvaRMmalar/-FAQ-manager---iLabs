@@ -19,17 +19,8 @@ const FAQReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        faq: action.payload.data,
-        //faq: action.payload.results,
-        // paginationOption: {
-        //   totalItems: action.payload?.totalItems,
-        //   page: action.payload?.page,
-        //   pageSize: action.payload?.pageSize,
-        //   numberOfPages: action.payload?.numberOfPages,
-        //   displayStart: action.payload?.displayStart,
-        //   displayEnd: action.payload?.displayEnd,
-        //   displayCount: action.payload?.displayCount,
-        // },
+        faq: action.payload,
+        paginationOption: action.paginationOption,
       };
 
     case types.LOAD_FAQ_FAIL:

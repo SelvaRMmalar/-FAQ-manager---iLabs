@@ -6,19 +6,17 @@ import DataTable from 'react-data-table-component';
 import { customStyles } from '../../assets/Style/DataTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadFAQ } from '../../store/FAQ/actions';
-function Table() {
+function Table({ query }) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
-  const [query, setQuery] = useState('');
-  const [offset, setOffset] = useState(1);
   useEffect(() => {
-    let offSet = page * pageSize - pageSize;
-    setOffset(offSet);
-    dispatch(loadFAQ(pageSize, offset, query));
+    dispatch(loadFAQ(pageSize, page, query));
   }, [dispatch, page, pageSize, query]);
 
-  const { loading, faq } = useSelector((state) => state.FAQReducer);
+  const { loading, faq, paginationOption } = useSelector(
+    (state) => state.FAQReducer
+  );
   return (
     <DataTable
       customStyles={customStyles}
@@ -30,7 +28,7 @@ function Table() {
       noDataComponent={<NoData />}
       pagination
       paginationServer
-      paginationTotalRows={pageSize}
+      paginationTotalRows={paginationOption.totalRows}
       onChangeRowsPerPage={(row) => setPageSize(row)}
       onChangePage={(pageNo) => setPage(pageNo)}
     />

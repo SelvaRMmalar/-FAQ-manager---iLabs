@@ -1,5 +1,5 @@
 const db = require('../models');
-
+const { Op } = require('sequelize');
 //create main  model
 const faq = db.faqs;
 
@@ -17,17 +17,33 @@ const addFaq = async (req, res) => {
 
 //get all faq
 const getAllFaq = async (req, res) => {
+  let limits = req.query.pageSize ? parseInt(req.query.pageSize) : null;
+  let offsets = req.query.page
+    ? parseInt(req.query.page) * limits - limits
+    : null;
+  let condition = req.query.search
+    ? {
+        [Op.or]: [
+          { id: { [Op.like]: `%${req.query.search}%` } },
+          { question: { [Op.like]: `%${req.query.search}%` } },
+          { catogory: { [Op.like]: `%${req.query.search}%` } },
+        ],
+      }
+    : null;
+
   let faqs = await faq.findAll({
     attributes: ['id', 'question', 'catogory', 'isActive'],
-    limit: req.query.limit,
-    offset: req.query.offset,
+    limit: limits,
+    offset: 1,
+    where: condition,
   });
-
+  let count = await faq.count();
   res.status(200).send({
     data: faqs,
     status: 'succeed',
-    pageSize: limit,
-    page: (offset + limit) / limit,
+    pageSize: limits,
+    page: parseInt(req.query.page),
+    totalRows: count,
   });
 };
 //update faq
