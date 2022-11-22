@@ -13,8 +13,8 @@ function Active({ item, setIsOpen }) {
     setIsOpen(false);
   };
   return (
-    <div>
-      <div>Are you sure?</div>
+    <div className='md:p-6 sm:p-1'>
+      <div className='md:p-3 sm:p-1 text-lg'>Are you sure?</div>
       <div className='flex justify-between p-4'>
         <Button
           name={item?.item?.isActive ? 'Deactivate' : 'Activate'}

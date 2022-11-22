@@ -11,8 +11,8 @@ function Delete({ id, setIsOpen }) {
   };
 
   return (
-    <div>
-      <div>Are you sure?</div>
+    <div className='md:p-6 sm:p-1'>
+      <div className='md:p-3 sm:p-1'>Are you sure?</div>
       <div className='flex justify-between p-4'>
         <Button
           name='Delete'
