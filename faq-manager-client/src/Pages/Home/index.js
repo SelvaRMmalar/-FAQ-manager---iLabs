@@ -6,7 +6,7 @@ import Button from '../../Components/Button';
 import { useNavigate } from 'react-router-dom';
 function Home() {
   const navigate = useNavigate();
-  const [query,setQuery]=useState('');
+  const [query, setQuery] = useState('');
   return (
     <div className=' bg-gray-200'>
       <div className='md:flex py-4'>
@@ -26,7 +26,7 @@ function Home() {
           />
         </div>
       </div>
-      <Search setQuery={setQuery}/>
+      <Search setQuery={setQuery} />
       <div className='py-8'>
         <Table query={query} />
       </div>
