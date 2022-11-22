@@ -28,3 +28,5 @@ run commond
 `APP_PASSWORD=`
 `APP_CILET=`
 `APP_PORT=`
+## run commond
+`npm start`
