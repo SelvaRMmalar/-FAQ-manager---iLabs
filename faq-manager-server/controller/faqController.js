@@ -18,9 +18,7 @@ const addFaq = async (req, res) => {
 //get all faq
 const getAllFaq = async (req, res) => {
   let limits = req.query.pageSize ? parseInt(req.query.pageSize) : null;
-  let offsets = req.query.page
-    ? parseInt(req.query.page) * limits - limits
-    : null;
+  let offsets = req.query.page ? (parseInt(req.query.page) - 1) * limits : null;
   let condition = req.query.search
     ? {
         [Op.or]: [
@@ -34,7 +32,7 @@ const getAllFaq = async (req, res) => {
   let faqs = await faq.findAll({
     attributes: ['id', 'question', 'catogory', 'isActive'],
     limit: limits,
-    offset: 1,
+    offset: offsets,
     where: condition,
   });
   let count = await faq.count();
