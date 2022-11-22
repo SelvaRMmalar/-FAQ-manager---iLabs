@@ -6,7 +6,7 @@ function Delete({ id, setIsOpen }) {
   const dispatch = useDispatch();
   const handleDelete = async () => {
     await dispatch(deleteItem(id));
-    await dispatch(loadFAQ());
+    await dispatch(loadFAQ(10, 1, ''));
     setIsOpen(false);
   };
 

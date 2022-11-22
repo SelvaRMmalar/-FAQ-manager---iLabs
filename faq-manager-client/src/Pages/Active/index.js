@@ -9,7 +9,7 @@ function Active({ item, setIsOpen }) {
       updateItem(item?.item?.id, { isActive: !item.item.isActive })
     );
 
-    await dispatch(loadFAQ());
+    await dispatch(loadFAQ(10, 1, ''));
     setIsOpen(false);
   };
   return (
